@@ -1,6 +1,12 @@
-import "@/styles/globals.css";
 import { MantineProvider } from "@mantine/core";
+import { Comfortaa } from "@next/font/google";
 import Head from "next/head";
+import "styles/globals.css";
+const comfortaa = Comfortaa({
+  weight: ["300", "400", "700"],
+  style: ["normal"],
+  subsets: ["latin"],
+});
 
 export default function App({ Component, pageProps }) {
   return (
@@ -11,16 +17,25 @@ export default function App({ Component, pageProps }) {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main>
+      <main >
         <MantineProvider
           withGlobalStyles
           withNormalizeCSS
           theme={{
             /** Put your mantine theme override here */
             colorScheme: "light",
+            fontFamily: "Comfortaa!important"
           }}
         >
+          <div className={comfortaa.className}>
+
+          <style jsx global>{`
+            html {
+              font-family: ${comfortaa.style.fontFamily};
+            }
+            `}</style>
           <Component {...pageProps} />
+            </div>
         </MantineProvider>
       </main>
     </>

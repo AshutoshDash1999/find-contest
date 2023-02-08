@@ -1,13 +1,19 @@
-import EventList from '@/components/EventList'
-import styles from '@/styles/Home.module.css'
-import { Inter } from '@next/font/google'
-
-const inter = Inter({ subsets: ['latin'] })
+import FutureEventList from "@/components/FutureEventList";
+import Header from "@/components/Header";
+import { Container, Grid } from "@mantine/core";
 
 export default function Home() {
   return (
     <>
-      <EventList/>
+      <Container size="xl" px="xs">
+        <Header />
+        <Grid gutter="xl">
+          <Grid.Col span={6}>
+            <FutureEventList />
+          </Grid.Col>
+          <Grid.Col span={6}>2</Grid.Col>
+        </Grid>
+      </Container>
     </>
-  )
+  );
 }
