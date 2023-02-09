@@ -49,7 +49,7 @@ const EventCard = () => {
                 Visit Competition
               </Button>
             </Link>
-            <Link href="#" target="_blank">
+            <Link href="https://calendar.google.com/event?action=TEMPLATE&dates=20230209T143500Z/20230209T163500Z&text=Codeforces%20Round%20%23851%20(Div.%202)&location=https://codeforces.com/contestRegistration/1788" target="_blank">
               <Button variant="subtle" color="dark">
                 Add to Calender
               </Button>

@@ -1,4 +1,5 @@
 import { createStyles, Flex, Text, Title } from "@mantine/core";
+import Link from "next/link";
 
 const useStyles = createStyles((theme) => ({
   navbar: {
@@ -12,7 +13,7 @@ const useStyles = createStyles((theme) => ({
     boxShadow: theme.shadows.xl,
   },
   heading: {
-    color: "red",
+    background: "linear-gradient(180deg,rgba(255,255,255,0) 55%, #B197FC 50%)",
   },
 }));
 
@@ -23,7 +24,16 @@ const Header = () => {
     <>
       <Flex justify="space-between" align="center" className={classes.navbar}>
         <Title className={classes.heading}>Find Contest</Title>
-        <Text>Creator</Text>
+        <Text>
+          Made by {" "}
+          <Link
+            style={{ textDecoration: "none" }}
+            target="_blank"
+            href="https://ashutoshdash.netlify.app/"
+          >
+            <Text span>Ashutosh Dash</Text>
+          </Link>
+        </Text>
       </Flex>
     </>
   );
