@@ -15,6 +15,13 @@ const useStyles = createStyles((theme) => ({
   heading: {
     background: "linear-gradient(180deg,rgba(255,255,255,0) 55%, #B197FC 50%)",
   },
+  creatorName:{
+    color:"black",
+    background: "linear-gradient(180deg,rgba(255,255,255,0) 85%, #B197FC 50%)",
+    '&:hover': {
+      background: "linear-gradient(180deg,rgba(255,255,255,0) 65%, #B197FC 50%)",
+    },
+  }
 }));
 
 const Header = () => {
@@ -23,7 +30,7 @@ const Header = () => {
   return (
     <>
       <Flex justify="space-between" align="center" className={classes.navbar}>
-        <Title className={classes.heading}>Find Contest</Title>
+        <Title  className={classes.heading}>Find Contest</Title>
         <Text>
           Made by {" "}
           <Link
@@ -31,7 +38,7 @@ const Header = () => {
             target="_blank"
             href="https://ashutoshdash.netlify.app/"
           >
-            <Text span>Ashutosh Dash</Text>
+            <Text span className={classes.creatorName}>Ashutosh Dash</Text>
           </Link>
         </Text>
       </Flex>
