@@ -16,6 +16,8 @@ const monthMap = {
   11: "Dec",
 };
 
+const colorLight = ["#FFD8A8", "#FFEC99", "#D8F5A2", "#B2F2BB", "#96F2D7", "#99E9F2", "#A5D8FF", "#BAC8FF", "#D0BFFF", "#EEBEFA", "#FCC2D7", "#FFC9C9"]
+
 const fetchDate = (inputDate) => {
   let utcDate = new Date(inputDate);
   let offset = 330; // IST offset is 330 minutes ahead of UTC
@@ -65,7 +67,7 @@ const EventCard = ({
               backgroundColor:
                 theme.colorScheme === "dark"
                   ? theme.colors.dark[6]
-                  : theme.colors.orange[3],
+                  : colorLight[Math.floor(Math.random()*colorLight.length)],
               textAlign: "center",
               padding: theme.spacing.sm,
               borderRadius: theme.radius.md,
