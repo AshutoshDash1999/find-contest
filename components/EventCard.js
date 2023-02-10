@@ -24,16 +24,14 @@ const fetchDate = (inputDate) => {
 };
 
 const changeDuration = (inputDuration) => {
-  if (inputDuration<60){
-    return inputDuration + "seconds"
-  } else if (inputDuration<3600){
-    return inputDuration/60 + "minutes"
-  } 
-  
-  else {
-    return inputDuration
+  if (inputDuration < 60) {
+    return inputDuration + "seconds";
+  } else if (inputDuration < 3600) {
+    return inputDuration / 60 + "minutes";
+  } else {
+    return inputDuration;
   }
-}
+};
 
 const EventCard = ({
   name,
@@ -44,7 +42,7 @@ const EventCard = ({
   url,
   duration,
 }) => {
-  console.log(fetchDate(start_time));
+  console.log();
   return (
     <Box
       sx={(theme) => ({
@@ -74,11 +72,14 @@ const EventCard = ({
               cursor: "default",
             })}
           >
-            <Text>
-              {String(fetchDate(start_time).getDate()).padStart(2, '0')}{" "}
+            <Text fz="lg">
+              {String(fetchDate(start_time).getDate()).padStart(2, "0")}{" "}
               {monthMap[fetchDate(start_time).getMonth()]}
             </Text>
-            <Text fz="xl" fw={700}>{String(fetchDate(start_time).getHours()).padStart(2, '0')} : {String(fetchDate(end_time).getMinutes()).padStart(2, '0')}</Text>
+            <Title fw={700}>
+              {String(fetchDate(start_time).getHours()).padStart(2, "0")} :{" "}
+              {String(fetchDate(end_time).getMinutes()).padStart(2, "0")}
+            </Title>
             <Text>IST</Text>
           </Box>
         </Grid.Col>
@@ -86,10 +87,17 @@ const EventCard = ({
           <Box>
             <Title>{name}</Title>
             <Text>
-              {String(fetchDate(start_time).getDate()).padStart(2, '0')}{" "}
-              {monthMap[fetchDate(start_time).getMonth()]} to{" "}
-              {String(fetchDate(start_time).getDate()).padStart(2, '0')}{" "}
-              {monthMap[fetchDate(end_time).getMonth()]}
+              <Text span fw={700}>
+                {String(fetchDate(start_time).getDate()).padStart(2, "0")}{" "}
+                {monthMap[fetchDate(start_time).getMonth()]}{" "}
+                {fetchDate(start_time).getFullYear()}
+              </Text>
+              {" "}to {" "}
+              <Text span fw={700}>
+                {String(fetchDate(start_time).getDate()).padStart(2, "0")}{" "}
+                {monthMap[fetchDate(end_time).getMonth()]}{" "}
+                {fetchDate(start_time).getFullYear()}
+              </Text>
             </Text>
             <Text>{changeDuration(duration)}</Text>
           </Box>
