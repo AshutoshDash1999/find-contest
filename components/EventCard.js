@@ -5,6 +5,7 @@ import {
   createStyles,
   Flex,
   Grid,
+  Paper,
   Text,
   Title
 } from "@mantine/core";
@@ -72,18 +73,18 @@ const useStyles = createStyles((theme) => ({
         : colorLight[Math.floor(Math.random() * colorLight.length)],
     textAlign: "center",
     padding: theme.spacing.sm,
-    borderRadius: theme.radius.md,
+    borderRadius: theme.radius.lg,
     cursor: "default",
   },
   eventCard: {
     backgroundColor:
       theme.colorScheme === "dark"
         ? theme.colors.dark[6]
-        : theme.colors.gray[0],
+        : "#ffffff",
     textAlign: "center",
     padding: theme.spacing.sm,
     margin: theme.spacing.xl,
-    borderRadius: theme.radius.md,
+    borderRadius: theme.radius.lg,
     cursor: "default",
     boxShadow: theme.shadows.sm,
   },
@@ -102,7 +103,7 @@ const EventCard = ({
 
   return (
     <Container>
-      <Box className={classes.eventCard}>
+      <Paper shadow="xs" p="md" withBorder className={classes.eventCard}>
         <Grid justify="center" align="center">
           <Grid.Col span={3}>
             <Box className={classes.timeBox}>
@@ -162,7 +163,7 @@ const EventCard = ({
             </Flex>
           </Grid.Col>
         </Grid>
-      </Box>
+      </Paper>
     </Container>
   );
 };

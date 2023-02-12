@@ -4,13 +4,13 @@ import Link from "next/link";
 const useStyles = createStyles((theme) => ({
   navbar: {
     backgroundColor:
-      theme.colorScheme === "dark" ? theme.colors.dark[6] : theme.colors.white,
+      theme.colorScheme === "dark" ? theme.colors.dark[6] : "white",
     textAlign: "center",
     padding: theme.spacing.md,
     margin: theme.spacing.md,
     borderRadius: theme.radius.md,
-    cursor: "pointer",
     boxShadow: theme.shadows.xl,
+    
   },
   heading: {
     background: "linear-gradient(180deg,rgba(255,255,255,0) 55%, #B197FC 50%)",

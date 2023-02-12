@@ -24,7 +24,7 @@ export default function App({ Component, pageProps }) {
           theme={{
             /** Put your mantine theme override here */
             colorScheme: "light",
-            fontFamily: "Comfortaa!important"
+            fontFamily: "Comfortaa!important",
           }}
         >
           <div className={comfortaa.className}>
