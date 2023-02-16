@@ -29,8 +29,8 @@ const Header = () => {
 
   return (
     <>
-      <Flex justify="space-between" align="center" className={classes.navbar}>
-        <Title  className={classes.heading}>Find Contest</Title>
+      <Flex direction={{ base: 'column', sm: 'row' }} gap="sm" justify="space-between" align="center" className={classes.navbar}>
+        <Title className={classes.heading}>Find Contest</Title>
         <Text>
           Made by {" "}
           <Link

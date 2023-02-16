@@ -105,7 +105,7 @@ const EventCard = ({
     <Container>
       <Paper shadow="xs" p="md" withBorder className={classes.eventCard}>
         <Grid justify="center" align="center">
-          <Grid.Col span={3}>
+          <Grid.Col sm={3}>
             <Box className={classes.timeBox}>
               <Text fz="lg">
                 {String(fetchDate(start_time).getDate()).padStart(2, "0")}{" "}
@@ -118,7 +118,7 @@ const EventCard = ({
               <Text>IST</Text>
             </Box>
           </Grid.Col>
-          <Grid.Col span={6}>
+          <Grid.Col sm={6}>
             <Box>
               <Title>{name}</Title>
               <Text>
@@ -137,7 +137,7 @@ const EventCard = ({
               <Text>{changeDuration(duration)}</Text>
             </Box>
           </Grid.Col>
-          <Grid.Col span={3}>
+          <Grid.Col sm={3}>
             <Flex direction="column" gap="md">
               <Link href={`${url}`} target="_blank">
                 <Button
