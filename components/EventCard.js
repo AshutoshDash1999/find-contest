@@ -1,4 +1,5 @@
 import {
+  Badge,
   Box,
   Button,
   Container,
@@ -78,15 +79,19 @@ const useStyles = createStyles((theme) => ({
   },
   eventCard: {
     backgroundColor:
-      theme.colorScheme === "dark"
-        ? theme.colors.dark[6]
-        : "#ffffff",
+      theme.colorScheme === "dark" ? theme.colors.dark[6] : "#ffffff",
     textAlign: "center",
     padding: theme.spacing.sm,
     margin: theme.spacing.xl,
     borderRadius: theme.radius.lg,
     cursor: "default",
     boxShadow: theme.shadows.sm,
+    position: "relative",
+  },
+  ongoingBadge: {
+    position: "absolute",
+    right:"20px",
+    top:"-10px"
   },
 }));
 
@@ -101,9 +106,34 @@ const EventCard = ({
 }) => {
   const { classes } = useStyles();
 
+  const startTime = new Date(start_time);
+  const endTime = new Date(end_time);
+
   return (
     <Container>
-      <Paper shadow="xs" p="md" withBorder className={classes.eventCard}>
+      <Paper
+        shadow="xs"
+        p="md"
+        withBorder
+        className={classes.eventCard}
+        sx={
+          status === "CODING" && {
+            border: "2px solid #B2F2BB",
+            boxShadow: "5px 8px 11px -3px rgba(110,255,92,0.48)",
+          }
+        }
+      >
+        {status === "CODING" && (
+          <Badge
+            className={classes.ongoingBadge}
+            color="green"
+            radius="sm"
+            variant="filled"
+            size="md"
+          >
+            Ongoing
+          </Badge>
+        )}
         <Grid justify="center" align="center">
           <Grid.Col sm={3}>
             <Box className={classes.timeBox}>
@@ -149,7 +179,25 @@ const EventCard = ({
                 </Button>
               </Link>
               <Link
-                href={`https://calendar.google.com/event?action=TEMPLATE&dates=20230209T143500Z/20230209T163500Z&text=Codeforces%20Round%20%23851%20(Div.%202)&location=${url}`}
+                href={`https://calendar.google.com/calendar/render?action=TEMPLATE&text=${name}&dates=${
+                  startTime.getUTCFullYear().toString() +
+                  (startTime.getUTCMonth() + 1).toString().padStart(2, "0") +
+                  startTime.getUTCDate().toString().padStart(2, "0") +
+                  "T" +
+                  startTime.getUTCHours().toString().padStart(2, "0") +
+                  startTime.getUTCMinutes().toString().padStart(2, "0") +
+                  startTime.getUTCSeconds().toString().padStart(2, "0") +
+                  "Z"
+                }/${
+                  endTime.getUTCFullYear().toString() +
+                  (endTime.getUTCMonth() + 1).toString().padStart(2, "0") +
+                  endTime.getUTCDate().toString().padStart(2, "0") +
+                  "T" +
+                  endTime.getUTCHours().toString().padStart(2, "0") +
+                  endTime.getUTCMinutes().toString().padStart(2, "0") +
+                  endTime.getUTCSeconds().toString().padStart(2, "0") +
+                  "Z"
+                }&location=${url}`}
                 target="_blank"
               >
                 <Button
