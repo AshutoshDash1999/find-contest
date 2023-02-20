@@ -12,7 +12,6 @@ export const filterSlice = createSlice({
     // Action to update filters
     addFilter: (state, action) => {
       state.filter = action.payload;
-      console.log("action", action);
     },
 
     // Special reducer for hydrating the state

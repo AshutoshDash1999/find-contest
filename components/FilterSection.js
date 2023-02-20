@@ -7,38 +7,10 @@ import { useDispatch } from "react-redux";
 const FilterSection = () => {
   const [filterMethods, setFilterMethods] = useState({
     searchKeyword: "",
-    // plateform: "all",
     ongoing: false,
   });
 
   const dispatch = useDispatch();
-
-  const [supportedSiteDataList, setSupportedSiteDataList] = useState([]);
-
-  const sitesApiUrl = "https://kontests.net/api/v1/sites";
-
-  useEffect(() => {
-    const fetchAPI = async () => {
-      // fetch data to show all the supported site
-      try {
-        const supportedSiteArray = [];
-        const responseData = await axios
-          .get(sitesApiUrl)
-          .then((response) =>
-            response.data.map((siteItem) =>
-              supportedSiteArray.push(siteItem[0])
-            )
-          )
-          .catch((error) =>
-            console.error("Error while fetching data: ", error)
-          );
-        setSupportedSiteDataList(supportedSiteArray);
-      } catch (error) {
-        console.error("Error while fetching data: ", error);
-      }
-    };
-    fetchAPI();
-  }, []);
 
   const filterHandler = (event) => {
     setFilterMethods({
@@ -46,8 +18,6 @@ const FilterSection = () => {
       [event.target.name]: event.target.value,
     });
   };
-
-  console.log(filterMethods);
 
   useEffect(() => {
     dispatch(addFilter(filterMethods));
@@ -69,19 +39,6 @@ const FilterSection = () => {
             onChange={filterHandler}
             name="searchKeyword"
           />
-
-          {/* <Select
-            placeholder="Pick platform"
-            searchable
-            nothingFound="Not found!"
-            radius="md"
-            data={supportedSiteDataList}
-            w="100%"
-            name="plateform"
-            onChange={(e) =>
-              setFilterMethods({ ...filterMethods, plateform: e })
-            }
-          /> */}
 
           <Switch
             label="Ongoing"

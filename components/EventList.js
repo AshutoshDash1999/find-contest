@@ -12,54 +12,52 @@ const FutureEventList = () => {
 
   const apiUrl = "https://kontests.net/api/v1/all";
 
-  const filter = useSelector(selectFilters);
-  console.log("filter", filter);
-
+  const filterKey = useSelector(selectFilters);
+  
   useEffect(() => {
-    const fetchAPI = async () => {
-      try {
-        setLoader(true);
-        const responseData = await axios
-          .get(apiUrl)
-          .then((response) => setEventDataList(response.data))
-          .catch((error) =>
-            console.error("Error while fetching data: ", error)
-          );
-        // console.log(responseData);
-        setLoader(false);
-      } catch (error) {
-        console.error("Error while fetching data: ", error);
-      }
-    };
     fetchAPI();
   }, []);
-
-  // console.log(eventDataList);
+  const fetchAPI = async () => {
+    try {
+      setLoader(true);
+      const responseData = await axios
+        .get(apiUrl)
+        .then((response) => setEventDataList(response.data))
+        .catch((error) => console.error("Error while fetching data: ", error));
+      // console.log(responseData);
+      setLoader(false);
+    } catch (error) {
+      console.error("Error while fetching data: ", error);
+    }
+  };
 
   useEffect(() => {
     const ongoingEvents = eventDataList.filter((eventItem) => {
-      if (!!filter?.searchKeyword === false && filter?.ongoing === true) {
+      if (filterKey?.searchKeyword?.length === 0 && filterKey?.ongoing === true) {
         return eventItem?.status === "CODING";
       } else if (
-        !!filter?.searchKeyword === true &&
-        filter?.ongoing === false
+        filterKey?.searchKeyword?.length >0 &&
+        filterKey?.ongoing === false
       ) {
         return (
           eventItem?.name
             .toLowerCase()
-            .includes(filter?.searchKeyword.toLowerCase()) ||
+            .includes(filterKey?.searchKeyword.toLowerCase()) ||
           eventItem?.url
             .toLowerCase()
-            .includes(filter?.searchKeyword.toLowerCase())
+            .includes(filterKey?.searchKeyword.toLowerCase())
         );
-      } else if (!!filter?.searchKeyword === true && filter?.ongoing === true) {
+      } else if (
+        !!filterKey?.searchKeyword === true &&
+        filterKey?.ongoing === true
+      ) {
         return (
           (eventItem?.name
             .toLowerCase()
-            .includes(filter?.searchKeyword.toLowerCase()) ||
+            .includes(filterKey?.searchKeyword.toLowerCase()) ||
             eventItem?.url
               .toLowerCase()
-              .includes(filter?.searchKeyword.toLowerCase())) &&
+              .includes(filterKey?.searchKeyword.toLowerCase())) &&
           eventItem?.status === "CODING"
         );
       } else {
@@ -67,10 +65,8 @@ const FutureEventList = () => {
       }
     });
     setFilteredList(ongoingEvents);
-    console.log("ongoingEvents:", ongoingEvents);
-  }, [filter?.searchKeyword, filter?.ongoing, eventDataList]);
+  }, [filterKey, eventDataList]);
 
-  console.log("filteredList", filteredList);
 
   return (
     <>
@@ -79,7 +75,11 @@ const FutureEventList = () => {
           <Loader color="violet" size="xl" variant="dots" />
         </Center>
       ) : (
-        filteredList.map((item) => <EventCard key={item.url} {...item} />)
+        filteredList.map((item, index) => {
+          return(
+            <EventCard key={index} {...item} />
+          )
+       })
       )}
     </>
   );
