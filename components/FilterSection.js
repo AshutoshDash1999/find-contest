@@ -1,13 +1,17 @@
+import { addComment, addFilter } from "@/redux/filterSlice";
 import { Container, Flex, Input, Paper, Select, Switch } from "@mantine/core";
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
 
 const FilterSection = () => {
   const [filterMethods, setFilterMethods] = useState({
     searchKeyword: "",
-    plateform: "all",
-    ongoing: true,
+    // plateform: "all",
+    ongoing: false,
   });
+
+  const dispatch = useDispatch();
 
   const [supportedSiteDataList, setSupportedSiteDataList] = useState([]);
 
@@ -36,6 +40,19 @@ const FilterSection = () => {
     fetchAPI();
   }, []);
 
+  const filterHandler = (event) => {
+    setFilterMethods({
+      ...filterMethods,
+      [event.target.name]: event.target.value,
+    });
+  };
+
+  console.log(filterMethods);
+
+  useEffect(() => {
+    dispatch(addFilter(filterMethods));
+  }, [dispatch, filterMethods]);
+
   return (
     <Container>
       <Paper shadow="sm" radius="lg" p="md">
@@ -46,24 +63,36 @@ const FilterSection = () => {
           gap="xl"
         >
           <Input
-            placeholder="Search competition..."
+            placeholder="Search competition, platform..."
             radius="md"
             w="100%"
-            onChange={(e) => console.log(e.target.value)}
+            onChange={filterHandler}
+            name="searchKeyword"
           />
 
-          <Select
+          {/* <Select
             placeholder="Pick platform"
             searchable
             nothingFound="Not found!"
             radius="md"
             data={supportedSiteDataList}
             w="100%"
-            onChange={(e) => console.log(e)}
-          />
+            name="plateform"
+            onChange={(e) =>
+              setFilterMethods({ ...filterMethods, plateform: e })
+            }
+          /> */}
+
           <Switch
             label="Ongoing"
-            onChange={(e) => console.log(e.target.checked)}
+            onLabel="Active"
+            offLabel="All"
+            size="md"
+            color="violet"
+            name="ongoing"
+            onChange={(e) =>
+              setFilterMethods({ ...filterMethods, ongoing: e.target.checked })
+            }
           />
         </Flex>
       </Paper>
