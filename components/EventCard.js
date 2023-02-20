@@ -149,7 +149,6 @@ const EventCard = ({
             </Box>
           </Grid.Col>
           <Grid.Col sm={6}>
-            <Box>
               <Title>{name}</Title>
               <Text>
                 <Text span fw={700}>
@@ -164,8 +163,7 @@ const EventCard = ({
                   {fetchDate(end_time).getFullYear()}
                 </Text>
               </Text>
-              <Text>{changeDuration(duration)}</Text>
-            </Box>
+              {/* <Text>{changeDuration(duration)}</Text> */}
           </Grid.Col>
           <Grid.Col sm={3}>
             <Flex direction="column" gap="md">

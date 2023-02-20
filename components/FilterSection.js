@@ -38,6 +38,7 @@ const FilterSection = () => {
             w="100%"
             onChange={filterHandler}
             name="searchKeyword"
+            variant="filled"
           />
 
           <Switch
