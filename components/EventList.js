@@ -1,5 +1,5 @@
 import { selectFilters } from "@/redux/filterSlice";
-import { Center, Loader } from "@mantine/core";
+import { Center, Loader, Text } from "@mantine/core";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
@@ -13,7 +13,7 @@ const FutureEventList = () => {
   const apiUrl = "https://kontests.net/api/v1/all";
 
   const filterKey = useSelector(selectFilters);
-  
+
   useEffect(() => {
     fetchAPI();
   }, []);
@@ -33,10 +33,13 @@ const FutureEventList = () => {
 
   useEffect(() => {
     const ongoingEvents = eventDataList.filter((eventItem) => {
-      if (filterKey?.searchKeyword?.length === 0 && filterKey?.ongoing === true) {
+      if (
+        filterKey?.searchKeyword?.length === 0 &&
+        filterKey?.ongoing === true
+      ) {
         return eventItem?.status === "CODING";
       } else if (
-        filterKey?.searchKeyword?.length >0 &&
+        filterKey?.searchKeyword?.length > 0 &&
         filterKey?.ongoing === false
       ) {
         return (
@@ -67,19 +70,20 @@ const FutureEventList = () => {
     setFilteredList(ongoingEvents);
   }, [filterKey, eventDataList]);
 
-
   return (
     <>
       {loader ? (
         <Center style={{ height: 200 }}>
           <Loader color="violet" size="xl" variant="dots" />
         </Center>
-      ) : (
+      ) : filteredList.length > 0 ? (
         filteredList.map((item, index) => {
-          return(
-            <EventCard key={index} {...item} />
-          )
-       })
+          return <EventCard key={index} {...item} />;
+        })
+      ) : (
+        <Center style={{ height: 200 }}>
+          <Text color="dimmed">Not Found !</Text>
+        </Center>
       )}
     </>
   );
