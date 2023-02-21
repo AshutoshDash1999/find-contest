@@ -91,6 +91,23 @@ const EventCard = ({
   const startTime = new Date(start_time);
   const endTime = new Date(end_time);
 
+  const convertTimetoTweleveHourFormat = (time) => {
+    const hour = time.getHours();
+    if (hour > 12) {
+      let newhour = String(hour-12).padStart(2, "0");
+      return newhour + " : " + String(time.getMinutes()).padStart(2, "0") + " PM";
+    } else {
+      return (
+        String(hour).padStart(2, "0") +
+        " : " +
+        String(time.getMinutes()).padStart(2, "0") +
+        " AM"
+      );
+    }
+  };
+
+  console.log(convertTimetoTweleveHourFormat(startTime));
+
   return (
     <Container>
       <Paper
@@ -124,8 +141,7 @@ const EventCard = ({
                 {monthMap[startTime.getMonth()]}
               </Text>
               <Title fw={700}>
-                {String(startTime.getHours()).padStart(2, "0")} :{" "}
-                {String(startTime.getMinutes()).padStart(2, "0")}
+                {convertTimetoTweleveHourFormat(startTime)}
               </Title>
               <Text>IST</Text>
             </Box>
