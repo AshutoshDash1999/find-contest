@@ -42,23 +42,6 @@ const colorLight = [
   "#FFC9C9",
 ];
 
-const fetchDate = (inputDate) => {
-  let utcDate = new Date(inputDate);
-  let offset = 330; // IST offset is 330 minutes ahead of UTC
-  let istDate = new Date(utcDate.getTime() + offset * 60 * 1000);
-  return istDate;
-};
-
-const changeDuration = (inputDuration) => {
-  if (inputDuration < 60) {
-    return inputDuration + "seconds";
-  } else if (inputDuration < 3600) {
-    return inputDuration / 60 + "minutes";
-  } else {
-    return inputDuration;
-  }
-};
-
 const useStyles = createStyles((theme) => ({
   externalBtn: {
     transition: "all 0.5s",
@@ -90,8 +73,8 @@ const useStyles = createStyles((theme) => ({
   },
   ongoingBadge: {
     position: "absolute",
-    right:"20px",
-    top:"-10px"
+    right: "20px",
+    top: "-10px",
   },
 }));
 
@@ -105,8 +88,10 @@ const EventCard = ({
   duration,
 }) => {
   const { classes } = useStyles();
-
+  console.log("start_time:", start_time);
+  console.log("name:", name);
   const startTime = new Date(start_time);
+  console.log("startTime:", startTime);
   const endTime = new Date(end_time);
 
   return (
@@ -138,32 +123,30 @@ const EventCard = ({
           <Grid.Col sm={3}>
             <Box className={classes.timeBox}>
               <Text fz="lg">
-                {String(fetchDate(start_time).getDate()).padStart(2, "0")}{" "}
-                {monthMap[fetchDate(start_time).getMonth()]}
+                {String(startTime.getDate()).padStart(2, "0")}{" "}
+                {monthMap[startTime.getMonth()]}
               </Text>
               <Title fw={700}>
-                {String(fetchDate(start_time).getHours()).padStart(2, "0")} :{" "}
-                {String(fetchDate(end_time).getMinutes()).padStart(2, "0")}
+                {String(startTime.getHours()).padStart(2, "0")} :{" "}
+                {String(startTime.getMinutes()).padStart(2, "0")}
               </Title>
               <Text>IST</Text>
             </Box>
           </Grid.Col>
           <Grid.Col sm={6}>
-              <Title>{name}</Title>
-              <Text>
-                <Text span fw={700}>
-                  {String(fetchDate(start_time).getDate()).padStart(2, "0")}{" "}
-                  {monthMap[fetchDate(start_time).getMonth()]}{" "}
-                  {fetchDate(start_time).getFullYear()}
-                </Text>{" "}
-                to{" "}
-                <Text span fw={700}>
-                  {String(fetchDate(end_time).getDate()).padStart(2, "0")}{" "}
-                  {monthMap[fetchDate(end_time).getMonth()]}{" "}
-                  {fetchDate(end_time).getFullYear()}
-                </Text>
+            <Title>{name}</Title>
+            <Text>
+              <Text span fw={700}>
+                {String(startTime.getDate()).padStart(2, "0")}{" "}
+                {monthMap[startTime.getMonth()]} {startTime.getFullYear()}
+              </Text>{" "}
+              to{" "}
+              <Text span fw={700}>
+                {String(endTime.getDate()).padStart(2, "0")}{" "}
+                {monthMap[endTime.getMonth()]} {endTime.getFullYear()}
               </Text>
-              {/* <Text>{changeDuration(duration)}</Text> */}
+            </Text>
+            {/* <Text>{changeDuration(duration)}</Text> */}
           </Grid.Col>
           <Grid.Col sm={3}>
             <Flex direction="column" gap="md">
