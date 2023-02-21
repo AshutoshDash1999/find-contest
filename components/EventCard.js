@@ -88,10 +88,7 @@ const EventCard = ({
   duration,
 }) => {
   const { classes } = useStyles();
-  console.log("start_time:", start_time);
-  console.log("name:", name);
   const startTime = new Date(start_time);
-  console.log("startTime:", startTime);
   const endTime = new Date(end_time);
 
   return (
