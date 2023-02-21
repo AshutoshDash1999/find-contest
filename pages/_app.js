@@ -1,12 +1,12 @@
 import { wrapper } from "@/redux/store";
 import { MantineProvider } from "@mantine/core";
-import { Comfortaa } from "@next/font/google";
+import { Montserrat } from "@next/font/google";
 import Head from "next/head";
 import { Provider } from "react-redux";
 import "styles/globals.css";
 
-const comfortaa = Comfortaa({
-  weight: ["300", "400", "700"],
+const montserrat = Montserrat({
+  weight: ["400"],
   style: ["normal"],
   subsets: ["latin"],
 });
@@ -35,19 +35,13 @@ export default function App({ Component, ...rest }) {
         <meta name="language" content="English" />
         <meta name="revisit-after" content="1 days" />
         <meta name="author" content="Ashutosh Dash" />
-        <meta
-          property="og:title"
-          content="Find Contest"
-        />
+        <meta property="og:title" content="Find Contest" />
         <meta
           property="og:description"
           content="Show upcoming and active competitive programming competitions."
         />
         <meta property="og:type" content="article" />
-        <meta
-          property="og:url"
-          content="https://find-contest.vercel.app/"
-        />
+        <meta property="og:url" content="https://find-contest.vercel.app/" />
         <meta
           property="og:image"
           content="https://flaviocopes.com/website-banner.jpg"
@@ -61,13 +55,13 @@ export default function App({ Component, ...rest }) {
             theme={{
               /** Put your mantine theme override here */
               colorScheme: "light",
-              fontFamily: "Comfortaa!important",
+              fontFamily: "Montserrat!important",
             }}
           >
-            <div className={comfortaa.className}>
+            <div className={montserrat.className}>
               <style jsx global>{`
                 html {
-                  font-family: ${comfortaa.style.fontFamily};
+                  font-family: ${montserrat.style.fontFamily};
                 }
               `}</style>
               <Component {...pageProps} />
