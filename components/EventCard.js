@@ -94,11 +94,11 @@ const EventCard = ({
     const hour = time.getHours();
     if (hour > 12) {
       let newhour = String(hour-12).padStart(2, "0");
-      return newhour + ":" + String(time.getMinutes()).padStart(2, "0") + " PM";
+      return newhour + " : " + String(time.getMinutes()).padStart(2, "0") + " PM";
     } else {
       return (
         String(hour).padStart(2, "0") +
-        ":" +
+        " : " +
         String(time.getMinutes()).padStart(2, "0") +
         " AM"
       );
@@ -133,7 +133,7 @@ const EventCard = ({
           </Badge>
         )}
         <Grid justify="center" align="center">
-          <Grid.Col sm={3}>
+          <Grid.Col sm={3.5}>
             <Box py="xl" px="xs" className={classes.timeBox}>
               <Text fz="lg">
                 {String(startTime.getDate()).padStart(2, "0")}{" "}
@@ -145,7 +145,7 @@ const EventCard = ({
               <Text>IST</Text>
             </Box>
           </Grid.Col>
-          <Grid.Col sm={6}>
+          <Grid.Col sm={5.5}>
             <Title>{name}</Title>
             <Text>
               <Text span fw={700}>
