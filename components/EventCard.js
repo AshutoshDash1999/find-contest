@@ -56,7 +56,6 @@ const useStyles = createStyles((theme) => ({
         ? theme.colors.dark[6]
         : colorLight[Math.floor(Math.random() * colorLight.length)],
     textAlign: "center",
-    padding: theme.spacing.sm,
     borderRadius: theme.radius.lg,
     cursor: "default",
   },
@@ -95,11 +94,11 @@ const EventCard = ({
     const hour = time.getHours();
     if (hour > 12) {
       let newhour = String(hour-12).padStart(2, "0");
-      return newhour + " : " + String(time.getMinutes()).padStart(2, "0") + " PM";
+      return newhour + ":" + String(time.getMinutes()).padStart(2, "0") + " PM";
     } else {
       return (
         String(hour).padStart(2, "0") +
-        " : " +
+        ":" +
         String(time.getMinutes()).padStart(2, "0") +
         " AM"
       );
@@ -135,7 +134,7 @@ const EventCard = ({
         )}
         <Grid justify="center" align="center">
           <Grid.Col sm={3}>
-            <Box className={classes.timeBox}>
+            <Box py="xl" px="xs" className={classes.timeBox}>
               <Text fz="lg">
                 {String(startTime.getDate()).padStart(2, "0")}{" "}
                 {monthMap[startTime.getMonth()]}
